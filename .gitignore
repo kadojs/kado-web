@@ -5,5 +5,4 @@ node_modules
 /dt.json
 /log
 npm-debug.log
-app.js*
 bundle.*

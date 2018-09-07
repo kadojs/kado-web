@@ -17,7 +17,13 @@
     "node": ">=8"
   },
   "main": "./app.js",
+  "scripts": {
+    "start": "nodemon --config nodemon.json app.js"
+  },
   "dependencies": {
-    "kado": "^3.1.0"
+    "kado": "^3.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
   }
 }
