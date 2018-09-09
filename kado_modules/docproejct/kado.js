@@ -23,9 +23,9 @@
 //module properties
 exports._kado = {
   enabled: true,
-  name: 'docproject',
+  name: 'docproejct',
   title: 'Doc Project',
-  description: 'Manage and publish docproject entries'
+  description: 'Manage and publish docproejct entries'
 }
 
 
@@ -35,7 +35,7 @@ exports._kado = {
  */
 exports.config = (config) => {
   config.$load({
-    docproject: {
+    docproejct: {
       title: 'Kado Doc Project'
     }
   })
@@ -73,7 +73,7 @@ exports.search = (K,app,keywords,start,limit) => {
     .then((result) => {return result.map((r) => {return {
       title: r.id,
       description: r.id,
-      uri: app.uri.get('/docproject/edit') + '?id=' + r.id,
+      uri: app.uri.get('/docproejct/edit') + '?id=' + r.id,
       updatedAt: r.updatedAt
     }})})
 }
@@ -87,29 +87,29 @@ exports.search = (K,app,keywords,start,limit) => {
 exports.admin = (K,app) => {
   let admin = require('./admin/index')
   //register permissions
-  app.permission.add('/docproject/create','Create docproject')
-  app.permission.add('/docproject/save','Save docproject')
-  app.permission.add('/docproject/list','List docproject')
-  app.permission.add('/docproject/edit','Edit docproject')
-  app.permission.add('/docproject/remove','Remove docproject')
+  app.permission.add('/docproejct/create','Create Doc Project')
+  app.permission.add('/docproejct/save','Save Doc Project')
+  app.permission.add('/docproejct/list','List Doc Project')
+  app.permission.add('/docproejct/edit','Edit Doc Project')
+  app.permission.add('/docproejct/remove','Remove Doc Project')
   //register views
-  app.view.add('docproject/create',__dirname + '/admin/view/create.html')
-  app.view.add('docproject/edit',__dirname + '/admin/view/edit.html')
-  app.view.add('docproject/list',__dirname + '/admin/view/list.html')
+  app.view.add('docproejct/create',__dirname + '/admin/view/create.html')
+  app.view.add('docproejct/edit',__dirname + '/admin/view/edit.html')
+  app.view.add('docproejct/list',__dirname + '/admin/view/list.html')
   //register navigation
-  app.nav.addGroup(app.uri.add('/docproject'),'Doc Project','')
-  app.nav.addItem('Doc Project',app.uri.add('/docproject/list'),'List','list')
-  app.nav.addItem('Doc Project',app.uri.add('/docproject/create'),'Create','plus')
+  app.nav.addGroup(app.uri.add('/docproejct'),'Doc Project','')
+  app.nav.addItem('Doc Project',app.uri.add('/docproejct/list'),'List','list')
+  app.nav.addItem('Doc Project',app.uri.add('/docproejct/create'),'Create','plus')
   //register routes
-  app.get(app.uri.get('/docproject'),(req,res) => {
-    res.redirect(301,app.uri.get('/docproject/list'))
+  app.get(app.uri.get('/docproejct'),(req,res) => {
+    res.redirect(301,app.uri.get('/docproejct/list'))
   })
-  app.get(app.uri.get('/docproject/list'),admin.list)
-  app.get(app.uri.get('/docproject/create'),admin.create)
-  app.get(app.uri.add('/docproject/edit'),admin.edit)
-  app.post(app.uri.add('/docproject/save'),admin.save)
-  app.post(app.uri.add('/docproject/remove'),admin.remove)
-  app.get(app.uri.get('/docproject/remove'),admin.remove)
+  app.get(app.uri.get('/docproejct/list'),admin.list)
+  app.get(app.uri.get('/docproejct/create'),admin.create)
+  app.get(app.uri.add('/docproejct/edit'),admin.edit)
+  app.post(app.uri.add('/docproejct/save'),admin.save)
+  app.post(app.uri.add('/docproejct/remove'),admin.remove)
+  app.get(app.uri.get('/docproejct/remove'),admin.remove)
 }
 
 
@@ -121,10 +121,10 @@ exports.admin = (K,app) => {
 exports.main = (K,app) => {
   let main = require('./main/index')
   //register routes
-  app.get(app.uri.add('/docproject'),main.index)
-  app.get(app.uri.add('/docproject/:uri'),main.entry)
+  app.get(app.uri.add('/docproejct'),main.index)
+  app.get(app.uri.add('/docproejct/:uri'),main.entry)
   //register navigation
-  app.nav.addGroup(app.uri.get('/docproject'),'Doc Project','')
+  app.nav.addGroup(app.uri.get('/docproejct'),'Doc Project','')
 }
 
 
@@ -136,6 +136,6 @@ exports.main = (K,app) => {
 exports.cli = (K,args) => {
   args.splice(2,1)
   process.argv = args
-  require('./bin/docproject')
+  require('./bin/docproejct')
 }
 

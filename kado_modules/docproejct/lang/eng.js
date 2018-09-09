@@ -19,43 +19,19 @@
  * You should have received a copy of the GNU General Public License
  * along with Kado.  If not, see <https://www.gnu.org/licenses/>.
  */
-const K = require('kado')
-const sequelize = K.db.sequelize
 
-const DocProject = sequelize.models.DocProject
-
-
-/**
- * List
- * @param {object} req
- * @param {object} res
- */
-exports.index = (req,res) => {
-  DocProject.findAll({order: [['createdAt','DESC']]})
-    .then((results) => {
-      res.render(res.locals._view.get('docproject/list',{
-        list: results
-      }))
-    })
-    .catch((err) => {
-      res.render('error',{error: err})
-    })
-}
-
-
-/**
- * Entry
- * @param {object} req
- * @param {object} res
- */
-exports.entry = (req,res) => {
-  DocProject.findOne({where: {id: req.query.id}})
-    .then((result) => {
-      res.render(res.locals._view.get('docproject/entry',{
-        item: result
-      }))
-    })
-    .catch((err) => {
-      res.render('error',{error: err})
-    })
+//docproejct english lang
+module.exports = {
+  '_module_name': 'docproejct',
+  '_module_title': 'Doc Project',
+  '_module_lang': 'eng',
+  'entry_not_found': 'Doc Project entry not found',
+  'entry': 'Doc Project entry',
+  'removed': 'Doc Project(s) removed',
+  'removal_error': 'Doc Project removal error',
+  'title': 'Title',
+  'created': 'Created',
+  'modified': 'Modified',
+  'active': 'Active',
+  'action': 'Action'
 }

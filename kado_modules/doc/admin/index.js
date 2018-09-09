@@ -26,7 +26,7 @@ const Doc = sequelize.models.Doc
 
 
 /**
- * List blogs
+ * List
  * @param {object} req
  * @param {object} res
  */
@@ -61,7 +61,7 @@ exports.create = (req,res) => {
  * @param {object} res
  */
 exports.edit = (req,res) => {
-  Doc.findOne({where: {id: req.query.id}})
+  Doc.find({where: {id: req.query.id}})
     .then((result) => {
       if(!result) throw new Error(K._l.doc.entry_not_found)
       res.render(res.locals._view.get('doc/edit'),{item: result})

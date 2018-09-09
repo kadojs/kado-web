@@ -26,13 +26,13 @@ const DocProject = sequelize.models.DocProject
 
 
 /**
- * List blogs
+ * List
  * @param {object} req
  * @param {object} res
  */
 exports.list = (req,res) => {
   if(!req.query.length){
-    res.render(res.locals._view.get('docproject/list'))
+    res.render(res.locals._view.get('docproejct/list'))
   } else {
     K.datatable(DocProject,req.query)
       .then((result) => {
@@ -51,7 +51,7 @@ exports.list = (req,res) => {
  * @param {object} res
  */
 exports.create = (req,res) => {
-  res.render(res.locals._view.get('docproject/create'))
+  res.render(res.locals._view.get('docproejct/create'))
 }
 
 
@@ -63,8 +63,8 @@ exports.create = (req,res) => {
 exports.edit = (req,res) => {
   DocProject.findOne({where: {id: req.query.id}})
     .then((result) => {
-      if(!result) throw new Error(K._l.docproject.entry_not_found)
-      res.render(res.locals._view.get('docproject/edit'),{item: result})
+      if(!result) throw new Error(K._l.docproejct.entry_not_found)
+      res.render(res.locals._view.get('docproejct/edit'),{item: result})
     })
     .catch((err) => {
       res.render('error',{error: err})
@@ -97,11 +97,11 @@ exports.save = (req,res) => {
         res.json({item: result.dataValues})
       } else {
         req.flash('success',{
-          message: K._l.docproject.entry + ' ' + (isNew ? K._l.created : K._l.saved),
-          href: '/docproject/edit?id=' + result.id,
+          message: K._l.docproejct.entry + ' ' + (isNew ? K._l.created : K._l.saved),
+          href: '/docproejct/edit?id=' + result.id,
           name: result.id
         })
-        res.redirect('/docproject/list')
+        res.redirect('/docproejct/list')
       }
     })
     .catch((err) => {
@@ -122,15 +122,15 @@ exports.remove = (req,res) => {
   K.modelRemoveById(DocProject,req.body.remove)
     .then(() => {
       if(json){
-        res.json({success: K._l.docproject.entry_removed})
+        res.json({success: K._l.docproejct.entry_removed})
       } else {
-        req.flash('success',K._l.docproject.entry_removed)
-        res.redirect('/docproject/list')
+        req.flash('success',K._l.docproejct.entry_removed)
+        res.redirect('/docproejct/list')
       }
     })
     .catch((err) => {
       if(json){
-        res.json({error: err.message || K._l.docproject.removal_error})
+        res.json({error: err.message || K._l.docproejct.removal_error})
       } else {
         res.render(res.locals._view.get('error'),{error: err.message})
       }
