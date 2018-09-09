@@ -1,0 +1,25 @@
+{{>header}}
+    <div class="container-fluid">
+      <div>
+        <div class="float-right">
+          <span>&nbsp;</span>
+          <a class="btn btn-success" href="/docproject/create">
+            <span class="fa fa-plus"></span> {{_l.create}} docproject
+          </a>
+        </div>
+        <h1>Doc Project {{_l.list}}</h1>
+      </div>
+      <table id="table" class="table table-bordered" data-remove="id" data-remove-uri="/docproject/remove">
+        <thead>
+        <tr>
+            <th data-name="name" data-uri="/docproject/edit?id={{item.id}}" data-link="id">Name</th>
+        </tr>
+        </thead>
+      </table>
+      <script type="text/javascript">
+        $(document).ready(() => {
+          $('#table').DataTable(DataTableConfig());
+        })
+      </script>
+    </div>
+{{>footer}}

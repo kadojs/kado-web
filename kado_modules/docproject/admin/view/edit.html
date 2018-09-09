@@ -1,0 +1,15 @@
+{{>header}}
+    <div class="container-fluid">
+      <h1>{{_l.update}} </h1>
+      <form class="form form-horizontal" action="/docproject/save" method="post" role="form">
+        <input type="hidden" name="id" value="{{item.id}}" />
+          <div class="form-group">
+            <label for="title">Name</label>
+            <input class="form-control" type="text" id="name" name="name" placeholder="Name" value="{{item.name}}" />
+          </div>
+        <div class="form-group">
+          <button class="btn btn-success" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+{{>footer}}
