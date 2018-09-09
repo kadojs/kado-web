@@ -1,0 +1,26 @@
+{{>header}}
+    <div class="container-fluid">
+      <div>
+        <div class="float-right">
+          <span>&nbsp;</span>
+          <a class="btn btn-success" href="/doc/create">
+            <span class="fa fa-plus"></span> {{_l.create}} doc
+          </a>
+        </div>
+        <h1>Doc {{_l.list}}</h1>
+      </div>
+      <table id="table" class="table table-bordered" data-remove="id" data-remove-uri="/doc/remove">
+        <thead>
+        <tr>
+            <th data-name="title" data-uri="/doc/edit?id={{item.id}}" data-link="id">Title</th>
+            <th data-name="uri" data-uri="/doc/edit?id={{item.id}}" data-link="id">Uri</th>
+        </tr>
+        </thead>
+      </table>
+      <script type="text/javascript">
+        $(document).ready(() => {
+          $('#table').DataTable(DataTableConfig());
+        })
+      </script>
+    </div>
+{{>footer}}

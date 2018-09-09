@@ -4,6 +4,13 @@ const fs = require('fs')
 //application config
 K.configure({
   root: __dirname,
+  db: {
+    sequelize: {
+      name: 'kadoweb',
+      user: 'kadoweb',
+      password: 'kadoweb'
+    }
+  },
   interface: {
     admin: { enabled: true },
     main: { enabled: true }
