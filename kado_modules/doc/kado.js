@@ -50,6 +50,11 @@ exports.config = (config) => {
 exports.db = (K,db) => {
   db.sequelize.enabled = true
   db.sequelize.import(__dirname + '/models/Doc.js')
+  db.sequelize.import(__dirname + '/models/DocRevision.js')
+  let Doc = db.sequelize.models.Doc
+  let DocRevision = db.sequelize.models.DocRevision
+  Doc.hasMany(DocRevision,{onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  DocRevision.belongsTo(Doc,{onDelete: 'CASCADE', onUpdate: 'CASCADE'})
 }
 
 

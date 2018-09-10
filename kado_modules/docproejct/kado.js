@@ -50,6 +50,16 @@ exports.config = (config) => {
 exports.db = (K,db) => {
   db.sequelize.enabled = true
   db.sequelize.import(__dirname + '/models/DocProject.js')
+  db.sequelize.import(__dirname + '/models/DocProjectVersion.js')
+  let Doc = db.sequelize.models.Doc
+  let DocProject = db.sequelize.models.DocProject
+  let DocProjectVersion = db.sequelize.models.DocProjectVersion
+  DocProject.hasMany(DocProjectVersion,
+    {onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  DocProjectVersion.belongsTo(DocProject,
+    {onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  DocProjectVersion.hasMany(Doc,{onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  Doc.belongsTo(DocProjectVersion,{onDelete: 'CASCADE', onUpdate: 'CASCADE'})
 }
 
 
