@@ -26,6 +26,12 @@ const Doc = sequelize.models.Doc
 
 
 /**
+ * Chain load into project
+ */
+exports.project = require('./project')
+
+
+/**
  * List
  * @param {object} req
  * @param {object} res

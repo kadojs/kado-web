@@ -37,10 +37,10 @@ program
   .command('create')
   .option('-t, --title <s>','Doc Project Title')
   .option('-c, --content <s>','Doc Project Content')
-  .description('Create new docproejct entry')
+  .description('Create new doc project entry')
   .action((opts) => {
     P.try(() => {
-      log.info('Creating docproejct entry')
+      log.info('Creating doc project entry')
       let doc = {
         name: opts.name,
         active: true
@@ -52,7 +52,7 @@ program
         process.exit()
       })
       .catch((err) => {
-        log.error('Error: Failed to create docproejct entry: ' + err)
+        log.error('Error: Failed to create doc project entry: ' + err)
         process.exit()
       })
   })
@@ -62,7 +62,7 @@ program
   .option('-i, --id <s>','Doc Project Id')
   .option('-t, --title <s>','Doc Project Title')
   .option('-c, --content <s>','Doc Project Content')
-  .description('Update existing docproejct entry')
+  .description('Update existing doc project entry')
   .action((opts) => {
     if(!opts.id) throw new Error('Doc Project id is required')
     DocProject.find({where: {id: opts.id}})
@@ -76,14 +76,14 @@ program
         process.exit()
       })
       .catch((err) => {
-        if(err) throw new Error('Could not save docproejct entry: ' + err)
+        if(err) throw new Error('Could not save doc project entry: ' + err)
       })
   })
 //remove
 program
   .command('remove')
   .option('-i, --id <s>','Doc Project Id to remove')
-  .description('Remove docproejct entry')
+  .description('Remove doc project entry')
   .action((opts) => {
     if(!opts.id) throw new Error('Doc Project Id is required... exiting')
     DocProject.destroy({where: {id: opts.id}})
@@ -92,13 +92,13 @@ program
         process.exit()
       })
       .catch((err) => {
-        log.error('Error: Could not remove docproejct entry: ' + err)
+        log.error('Error: Could not remove doc project entry: ' + err)
       })
   })
 //list
 program
   .command('list')
-  .description('List docproejct entries')
+  .description('List doc project entries')
   .action(() => {
     let table = new Table({
       head: [
@@ -118,12 +118,12 @@ program
         ])
       })
       .then(() => {
-        if(!count) table.push(['No docproejct entries'])
+        if(!count) table.push(['No doc project entries'])
         console.log(table.toString())
         process.exit()
       })
       .catch((err) => {
-        log.error('Error: Could not list docproejct entries ' +
+        log.error('Error: Could not list doc project entries ' +
           err.stack)
         process.exit()
       })

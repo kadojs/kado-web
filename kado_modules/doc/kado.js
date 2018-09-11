@@ -25,7 +25,7 @@ exports._kado = {
   enabled: true,
   name: 'doc',
   title: 'Doc',
-  description: 'Manage and publish doc entries'
+  description: 'Manage and publish documents based on versions and revisions'
 }
 
 
@@ -51,10 +51,20 @@ exports.db = (K,db) => {
   db.sequelize.enabled = true
   db.sequelize.import(__dirname + '/models/Doc.js')
   db.sequelize.import(__dirname + '/models/DocRevision.js')
+  db.sequelize.import(__dirname + '/models/DocProject.js')
+  db.sequelize.import(__dirname + '/models/DocProjectVersion.js')
   let Doc = db.sequelize.models.Doc
   let DocRevision = db.sequelize.models.DocRevision
+  let DocProject = db.sequelize.models.DocProject
+  let DocProjectVersion = db.sequelize.models.DocProjectVersion
   Doc.hasMany(DocRevision,{onDelete: 'CASCADE', onUpdate: 'CASCADE'})
   DocRevision.belongsTo(Doc,{onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  DocProject.hasMany(DocProjectVersion,
+    {onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  DocProjectVersion.belongsTo(DocProject,
+    {onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  DocProjectVersion.hasMany(Doc,{onDelete: 'CASCADE', onUpdate: 'CASCADE'})
+  Doc.belongsTo(DocProjectVersion,{onDelete: 'CASCADE', onUpdate: 'CASCADE'})
 }
 
 
@@ -97,14 +107,26 @@ exports.admin = (K,app) => {
   app.permission.add('/doc/list','List Doc')
   app.permission.add('/doc/edit','Edit Doc')
   app.permission.add('/doc/remove','Remove Doc')
+  app.permission.add('/doc/project/create','Create Doc Project')
+  app.permission.add('/doc/project/save','Save Doc Project')
+  app.permission.add('/doc/project/list','List Doc Projects')
+  app.permission.add('/doc/project/edit','Edit Doc Project')
+  app.permission.add('/doc/project/remove','Remove Doc Project')
   //register views
   app.view.add('doc/create',__dirname + '/admin/view/create.html')
   app.view.add('doc/edit',__dirname + '/admin/view/edit.html')
   app.view.add('doc/list',__dirname + '/admin/view/list.html')
+  app.view.add('doc/project/create',__dirname +
+    '/admin/view/project/create.html')
+  app.view.add('doc/project/edit',__dirname + '/admin/view/project/edit.html')
+  app.view.add('doc/project/list',__dirname + '/admin/view/project/list.html')
   //register navigation
   app.nav.addGroup(app.uri.add('/doc'),'Doc','')
   app.nav.addItem('Doc',app.uri.add('/doc/list'),'List','list')
   app.nav.addItem('Doc',app.uri.add('/doc/create'),'Create','plus')
+  app.nav.addItem('Doc',app.uri.add('/doc/project/list'),'List Projects','list')
+  app.nav.addItem('Doc',app.uri.add('/doc/project/create'),
+    'Create Project','plus')
   //register routes
   app.get(app.uri.get('/doc'),(req,res) => {
     res.redirect(301,app.uri.get('/doc/list'))
@@ -115,6 +137,15 @@ exports.admin = (K,app) => {
   app.post(app.uri.add('/doc/save'),admin.save)
   app.post(app.uri.add('/doc/remove'),admin.remove)
   app.get(app.uri.get('/doc/remove'),admin.remove)
+  app.get(app.uri.get('/doc/project'),(req,res) => {
+    res.redirect(301,app.uri.get('/doc/project/list'))
+  })
+  app.get(app.uri.get('/doc/project/list'),admin.project.list)
+  app.get(app.uri.get('/doc/project/create'),admin.project.create)
+  app.get(app.uri.add('/doc/project/edit'),admin.project.edit)
+  app.post(app.uri.add('/doc/project/save'),admin.project.save)
+  app.post(app.uri.add('/doc/project/remove'),admin.project.remove)
+  app.get(app.uri.get('/doc/project/remove'),admin.project.remove)
 }
 
 
@@ -130,6 +161,11 @@ exports.main = (K,app) => {
   app.get(app.uri.add('/doc/:uri'),main.entry)
   //register navigation
   app.nav.addGroup(app.uri.get('/doc'),'Doc','')
+  //register routes
+  app.get(app.uri.add('/doc/project'),main.project.index)
+  app.get(app.uri.add('/doc/project/:uri'),main.project.entry)
+  //register navigation
+  app.nav.addGroup(app.uri.get('/doc/project'),'Doc Project','')
 }
 
 
@@ -139,8 +175,11 @@ exports.main = (K,app) => {
  * @param {Array} args
  */
 exports.cli = (K,args) => {
-  args.splice(2,1)
-  process.argv = args
-  require('./bin/doc')
+  if('project' === args[1]){
+    args = args.splice(1,1)
+    process.argv = args
+    return ('./bin/DocProject')
+  } else {
+    require('./bin/doc')
+  }
 }
-
