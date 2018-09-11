@@ -137,7 +137,7 @@ exports.admin = (K,app) => {
   app.post(app.uri.add('/doc/save'),admin.save)
   app.post(app.uri.add('/doc/remove'),admin.remove)
   app.get(app.uri.get('/doc/remove'),admin.remove)
-  app.get(app.uri.get('/doc/project'),(req,res) => {
+  app.get(app.uri.add('/doc/project'),(req,res) => {
     res.redirect(301,app.uri.get('/doc/project/list'))
   })
   app.get(app.uri.get('/doc/project/list'),admin.project.list)

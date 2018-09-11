@@ -32,7 +32,7 @@ const DocProject = sequelize.models.DocProject
  */
 exports.list = (req,res) => {
   if(!req.query.length){
-    res.render(res.locals._view.get('docproejct/list'))
+    res.render(res.locals._view.get('doc/project/list'))
   } else {
     K.datatable(DocProject,req.query)
       .then((result) => {
@@ -51,7 +51,7 @@ exports.list = (req,res) => {
  * @param {object} res
  */
 exports.create = (req,res) => {
-  res.render(res.locals._view.get('docproejct/create'))
+  res.render(res.locals._view.get('doc/project/create'))
 }
 
 
@@ -63,8 +63,8 @@ exports.create = (req,res) => {
 exports.edit = (req,res) => {
   DocProject.findOne({where: {id: req.query.id}})
     .then((result) => {
-      if(!result) throw new Error(K._l.docproejct.entry_not_found)
-      res.render(res.locals._view.get('docproejct/edit'),{item: result})
+      if(!result) throw new Error(K._l.doc.entry_not_found)
+      res.render(res.locals._view.get('doc/project/edit'),{item: result})
     })
     .catch((err) => {
       res.render('error',{error: err})
@@ -97,11 +97,11 @@ exports.save = (req,res) => {
         res.json({item: result.dataValues})
       } else {
         req.flash('success',{
-          message: K._l.docproejct.entry + ' ' + (isNew ? K._l.created : K._l.saved),
-          href: '/docproejct/edit?id=' + result.id,
+          message: K._l.doc.entry + ' ' + (isNew ? K._l.created : K._l.saved),
+          href: '/doc/project/edit?id=' + result.id,
           name: result.id
         })
-        res.redirect('/docproejct/list')
+        res.redirect('/doc/project/list')
       }
     })
     .catch((err) => {
@@ -125,7 +125,7 @@ exports.remove = (req,res) => {
         res.json({success: K._l.docproejct.entry_removed})
       } else {
         req.flash('success',K._l.docproejct.entry_removed)
-        res.redirect('/docproejct/list')
+        res.redirect('/doc/project/list')
       }
     })
     .catch((err) => {
