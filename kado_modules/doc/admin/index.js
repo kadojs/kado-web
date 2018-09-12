@@ -23,6 +23,8 @@ const K = require('kado')
 const sequelize = K.db.sequelize
 
 const Doc = sequelize.models.Doc
+const DocProject = sequelize.models.DocProject
+const DocProjectVersion = sequelize.models.DocProjectVersion
 
 
 /**
@@ -46,7 +48,9 @@ exports.list = (req,res) => {
   if(!req.query.length){
     res.render(res.locals._view.get('doc/list'))
   } else {
-    K.datatable(Doc,req.query)
+    K.datatable(Doc,req.query,{
+      include: [{model: DocProjectVersion, include: [DocProject]}]
+    })
       .then((result) => {
         res.json(result)
       })
@@ -63,7 +67,10 @@ exports.list = (req,res) => {
  * @param {object} res
  */
 exports.create = (req,res) => {
-  res.render(res.locals._view.get('doc/create'))
+  DocProjectVersion.find({include: [DocProject]})
+    .then((result) => {
+      res.render(res.locals._view.get('doc/create'),{projects: result})
+    })
 }
 
 
@@ -93,6 +100,11 @@ exports.save = (req,res) => {
   let data = req.body
   let isNew = false
   let json = K.isClientJSON(req)
+  if(!data.DocProjectVersionId){
+    let errParams = {error: 'Missing DocProjectVersionId'}
+    if(json) return res.json(errParams)
+    else return res.render(res.locals._view.get('error'),errParams)
+  }
   Doc.findOne({where: {id: data.id}})
     .then((result) => {
       if(!result){
@@ -101,6 +113,7 @@ exports.save = (req,res) => {
       }
       if(data.title) result.title = data.title
       if(data.uri) result.uri = data.uri
+      result.DocProjectVersionId = data.DocProjectVersionId
       return result.save()
     })
     .then((result) => {
