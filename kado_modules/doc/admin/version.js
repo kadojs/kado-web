@@ -25,34 +25,19 @@ const sequelize = K.db.sequelize
 const DocProject = sequelize.models.DocProject
 const DocProjectVersion = sequelize.models.DocProjectVersion
 
-
-/**
- * List
- * @param {object} req
- * @param {object} res
- */
-exports.list = (req,res) => {
-  if(!req.query.length){
-    res.render(res.locals._view.get('doc/project/list'))
-  } else {
-    K.datatable(DocProject,req.query)
-      .then((result) => {
-        res.json(result)
-      })
-      .catch((err) => {
-        res.json({error: err.message})
-      })
-  }
-}
-
-
 /**
  * Create entry
  * @param {object} req
  * @param {object} res
  */
 exports.create = (req,res) => {
-  res.render(res.locals._view.get('doc/project/create'))
+  if(!req.query.project){
+    res.render(res.locals._view.get('error'),{error: 'Missing project id'})
+  } else {
+    res.render(res.locals._view.get('doc/version/create'),{
+      project: req.query.project
+    })
+  }
 }
 
 
@@ -62,10 +47,10 @@ exports.create = (req,res) => {
  * @param {object} res
  */
 exports.edit = (req,res) => {
-  DocProject.findOne({where: {id: req.query.id}, include: [DocProjectVersion]})
+  DocProjectVersion.findOne({where: {id: req.query.id}})
     .then((result) => {
       if(!result) throw new Error(K._l.doc.entry_not_found)
-      res.render(res.locals._view.get('doc/project/edit'),{item: result})
+      res.render(res.locals._view.get('doc/version/edit'),{item: result})
     })
     .catch((err) => {
       res.render('error',{error: err})
@@ -82,25 +67,41 @@ exports.save = (req,res) => {
   let data = req.body
   let isNew = false
   let json = K.isClientJSON(req)
-  DocProject.findOne({where: {id: data.id}})
+  if(!data.DocProjectId){
+    let errParams = {error: 'Missing project'}
+    if(json){
+      return res.json(errParams)
+    } else {
+      return res.render(res.locals._view.get('error'),errParams)
+    }
+  }
+  DocProjectVersion.findOne({where: {id: data.id}})
     .then((result) => {
       if(!result){
         isNew = true
-        result = DocProject.build()
+        result = DocProjectVersion.build({
+          DocProjectId: data.DocProjectId
+        })
       }
       if(data.name) result.name = data.name
       return result.save()
     })
     .then((result) => {
+      return DocProjectVersion.findOne({
+        where: {id: result.id}, include: [DocProject]
+      })
+    })
+    .then((result) => {
+      console.log(result)
       if(json){
         res.json({item: result.dataValues})
       } else {
         req.flash('success',{
           message: K._l.doc.entry + ' ' + (isNew ? K._l.created : K._l.saved),
-          href: '/doc/project/edit?id=' + result.id,
+          href: '/doc/version/edit?id=' + result.id,
           name: result.id
         })
-        res.redirect('/doc/project/list')
+        res.redirect('/doc/project/edit?id=' + result.DocProject.id)
       }
     })
     .catch((err) => {
@@ -117,14 +118,19 @@ exports.save = (req,res) => {
 exports.remove = (req,res) => {
   let json = K.isClientJSON(req)
   if(req.query.id) req.body.remove = req.query.id.split(',')
+  if(req.query.project) req.body.project = req.query.project
   if(!(req.body.remove instanceof Array)) req.body.remove = [req.body.remove]
-  K.modelRemoveById(DocProject,req.body.remove)
+  K.modelRemoveById(DocProjectVersion,req.body.remove)
     .then(() => {
       if(json){
-        res.json({success: K._l.doc.removed_project})
+        res.json({success: K._l.doc.removed_version})
       } else {
-        req.flash('success',K._l.doc.removed_project)
-        res.redirect('/doc/project/list')
+        req.flash('success',K._l.doc.removed_version)
+        if(req.body.project){
+          res.redirect(301,'/doc/project/edit?id=' + req.body.project)
+        } else {
+          res.redirect('/doc/project/list')
+        }
       }
     })
     .catch((err) => {

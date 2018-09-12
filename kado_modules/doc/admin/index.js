@@ -32,6 +32,12 @@ exports.project = require('./project')
 
 
 /**
+ * Chain load into version manager
+ */
+exports.version = require('./version')
+
+
+/**
  * List
  * @param {object} req
  * @param {object} res
@@ -95,8 +101,6 @@ exports.save = (req,res) => {
       }
       if(data.title) result.title = data.title
       if(data.uri) result.uri = data.uri
-      if('undefined' === typeof data.active) result.active = false
-      if(data.active) result.active = true
       return result.save()
     })
     .then((result) => {
@@ -129,9 +133,9 @@ exports.remove = (req,res) => {
   K.modelRemoveById(Doc,req.body.remove)
     .then(() => {
       if(json){
-        res.json({success: K._l.doc.entry_removed})
+        res.json({success: K._l.doc.removed})
       } else {
-        req.flash('success',K._l.doc.entry_removed)
+        req.flash('success',K._l.doc.removed)
         res.redirect('/doc/list')
       }
     })

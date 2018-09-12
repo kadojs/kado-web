@@ -112,6 +112,10 @@ exports.admin = (K,app) => {
   app.permission.add('/doc/project/list','List Doc Projects')
   app.permission.add('/doc/project/edit','Edit Doc Project')
   app.permission.add('/doc/project/remove','Remove Doc Project')
+  app.permission.add('/doc/version/create','Create Doc Project Version')
+  app.permission.add('/doc/version/save','Save Doc Project Version')
+  app.permission.add('/doc/version/edit','Edit Doc Project Version')
+  app.permission.add('/doc/version/remove','Remove Doc Project Version')
   //register views
   app.view.add('doc/create',__dirname + '/admin/view/create.html')
   app.view.add('doc/edit',__dirname + '/admin/view/edit.html')
@@ -120,6 +124,9 @@ exports.admin = (K,app) => {
     '/admin/view/project/create.html')
   app.view.add('doc/project/edit',__dirname + '/admin/view/project/edit.html')
   app.view.add('doc/project/list',__dirname + '/admin/view/project/list.html')
+  app.view.add('doc/version/create',__dirname +
+    '/admin/view/version/create.html')
+  app.view.add('doc/version/edit',__dirname + '/admin/view/version/edit.html')
   //register navigation
   app.nav.addGroup(app.uri.add('/doc'),'Doc','')
   app.nav.addItem('Doc',app.uri.add('/doc/list'),'List','list')
@@ -146,6 +153,11 @@ exports.admin = (K,app) => {
   app.post(app.uri.add('/doc/project/save'),admin.project.save)
   app.post(app.uri.add('/doc/project/remove'),admin.project.remove)
   app.get(app.uri.get('/doc/project/remove'),admin.project.remove)
+  app.get(app.uri.add('/doc/project/version/create'),admin.version.create)
+  app.get(app.uri.add('/doc/project/version/edit'),admin.version.edit)
+  app.post(app.uri.add('/doc/project/version/save'),admin.version.save)
+  app.post(app.uri.add('/doc/project/version/remove'),admin.version.remove)
+  app.get(app.uri.get('/doc/project/version/remove'),admin.version.remove)
 }
 
 

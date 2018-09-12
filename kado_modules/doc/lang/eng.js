@@ -28,6 +28,8 @@ module.exports = {
   'entry_not_found': 'Doc entry not found',
   'entry': 'Doc entry',
   'removed': 'Doc(s) removed',
+  'removed_project': 'Doc Project removed',
+  'removed_version': 'Doc Project Version removed',
   'removal_error': 'Doc removal error',
   'title': 'Title',
   'created': 'Created',
