@@ -48,7 +48,7 @@ exports.create = (req,res) => {
  */
 exports.edit = (req,res) => {
   if(req.query.DocProjectVersionId) req.query.id = req.query.DocProjectVersionId
-  DocProjectVersion.findOne({where: {id: req.query.id}})
+  DocProjectVersion.findOne({where: {id: req.query.id}, include: [DocProject]})
     .then((result) => {
       if(!result) throw new Error(K._l.doc.entry_not_found)
       res.render(res.locals._view.get('doc/version/edit'),{item: result})
@@ -93,7 +93,6 @@ exports.save = (req,res) => {
       })
     })
     .then((result) => {
-      console.log(result)
       if(json){
         res.json({item: result.dataValues})
       } else {
@@ -120,6 +119,7 @@ exports.remove = (req,res) => {
   let json = K.isClientJSON(req)
   if(req.query.id) req.body.remove = req.query.id.split(',')
   if(req.query.project) req.body.project = req.query.project
+  if(req.query.DocProjectId) req.body.project = req.query.DocProjectId
   if(!(req.body.remove instanceof Array)) req.body.remove = [req.body.remove]
   K.modelRemoveById(DocProjectVersion,req.body.remove)
     .then(() => {

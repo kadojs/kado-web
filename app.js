@@ -20,7 +20,9 @@ K.configure({
         'codemirror',
         'highlight.js',
         'squire-rte',
+        'tui-code-snippet',
         'tui-editor',
+        'to-mark'
       ]
     },
     main: {

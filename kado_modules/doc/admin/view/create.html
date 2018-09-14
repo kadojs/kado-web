@@ -4,11 +4,11 @@
       <form class="form form-horizontal" action="{{_u._doc_save}}" method="post" role="form">
         <div class="form-group">
           <label for="title">Title</label>
-          <input class="form-control" type="text" id="title" name="title" placeholder="Title" />
+          <input class="form-control" type="text" id="docTitle" name="title" placeholder="Title" />
         </div>
         <div class="form-group">
           <label for="uri">Uri</label>
-          <input class="form-control" type="text" id="uri" name="uri" placeholder="Uri" />
+          <input class="form-control" type="text" id="docUri" name="uri" placeholder="Uri" />
         </div>
         <div class="form-group">
           <label for="DocProjectVersionId">Project Version</label>
@@ -22,5 +22,20 @@
           <button class="btn btn-success">{{_l.save}}</button>
         </div>
       </form>
+      <script type="text/javascript">
+        $(document).ready(() => {
+          let uriEl = $('#docUri')
+          let titleEl = $('#docTitle')
+          let uriEmpty = uriEl.val() === ''
+          let updateUri = () => {
+            let title = titleEl.val()
+            let uri = title.replace(/[\s]+/g,'-').toLowerCase()
+            if(uriEmpty) uriEl.val(uri)
+          }
+          titleEl.keyup(updateUri)
+          titleEl.change(updateUri)
+          titleEl.focusout(updateUri)
+        })
+      </script>
     </div>
 {{>footer}}

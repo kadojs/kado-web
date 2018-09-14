@@ -35,7 +35,7 @@
             <td>{{#_printDate}}{{updatedAt}}{{/_printDate}}</td>
             <td>
               <a href="{{_u._doc_project_version_edit}}?id={{id}}" class="btn btn-sm btn-primary">Edit</a>
-              <a href="{{_u._doc_project_version_remove}}?id={{id}}&project={{item.id}}" class="btn btn-sm btn-danger">Remove</a>
+              <a href="{{_u._doc_project_version_remove}}?id={{id}}&DocProjectId={{item.id}}" class="btn btn-sm btn-danger">Remove</a>
             </td>
           </tr>
         {{/item.DocProjectVersions}}
