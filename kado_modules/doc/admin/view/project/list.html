@@ -2,16 +2,16 @@
     <div class="container-fluid">
       <div>
         <div class="float-right">
-          <a class="btn btn-success" href="/doc/project/create">
+          <a class="btn btn-success" href="{{_u._doc_project_create}}">
             <span class="fa fa-plus"></span> {{_l.create}} Doc Project
           </a>
         </div>
         <h1>Doc Project {{_l.list}}</h1>
       </div>
-      <table id="table" class="table table-bordered" data-remove="id" data-remove-uri="/doc/project/remove">
+      <table id="table" class="table table-bordered" data-remove="id" data-remove-uri="{{_u._doc_project_remove}}">
         <thead>
         <tr>
-            <th data-name="name" data-uri="/doc/project/edit" data-link="id">Name</th>
+            <th data-name="name" data-uri="{{_u._doc_project_edit}}" data-link="id">Name</th>
         </tr>
         </thead>
       </table>

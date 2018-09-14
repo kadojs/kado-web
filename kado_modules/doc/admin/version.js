@@ -47,6 +47,7 @@ exports.create = (req,res) => {
  * @param {object} res
  */
 exports.edit = (req,res) => {
+  if(req.query.DocProjectVersionId) req.query.id = req.query.DocProjectVersionId
   DocProjectVersion.findOne({where: {id: req.query.id}})
     .then((result) => {
       if(!result) throw new Error(K._l.doc.entry_not_found)

@@ -12,8 +12,20 @@ K.configure({
     }
   },
   interface: {
-    admin: { enabled: true },
-    main: { enabled: true }
+    admin: {
+      enabled: true,
+      scriptServer: [
+        'markdown-it',
+        'to-mark',
+        'codemirror',
+        'highlight.js',
+        'squire-rte',
+        'tui-editor',
+      ]
+    },
+    main: {
+      enabled: true
+    }
   },
   module: {
     blog: { enabled: false },

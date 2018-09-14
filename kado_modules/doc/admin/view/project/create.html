@@ -1,7 +1,7 @@
 {{>header}}
     <div class="container-fluid">
       <h1>{{_l.create}} Doc Project</h1>
-      <form class="form form-horizontal" action="/doc/project/save" method="post" role="form">
+      <form class="form form-horizontal" action="{{_u._doc_project_save}}" method="post" role="form">
           <div class="form-group">
             <label for="title">Name</label>
             <input class="form-control" type="text" id="name" name="name" placeholder="Name" />
