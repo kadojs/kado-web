@@ -31,13 +31,19 @@ module.exports = (sequelize,DataTypes) => {
   return sequelize.define('DocRevision',{
     content: {
       type: DataTypes.TEXT,
-      allowNull: true,
-      defaultValue: null
+      allowNull: false
+    },
+    contentHash: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     html: {
       type: DataTypes.TEXT,
-      allowNull: true,
-      defaultValue: null
+      allowNull: false
+    },
+    htmlHash: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   })
 }

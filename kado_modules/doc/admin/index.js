@@ -19,10 +19,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Kado.  If not, see <https://www.gnu.org/licenses/>.
  */
+const crypto = require('crypto')
+
 const K = require('kado')
 const sequelize = K.db.sequelize
 
 const Doc = sequelize.models.Doc
+const DocRevision = sequelize.models.DocRevision
 const DocProject = sequelize.models.DocProject
 const DocProjectVersion = sequelize.models.DocProjectVersion
 
@@ -83,6 +86,7 @@ exports.edit = (req,res) => {
   Doc.find({where: {id: req.query.id}})
     .then((result) => {
       if(!result) throw new Error(K._l.doc.entry_not_found)
+      result.content = encodeURIComponent(result.content)
       res.render(res.locals._view.get('doc/edit'),{item: result})
     })
     .catch((err) => {
@@ -100,6 +104,10 @@ exports.save = (req,res) => {
   let data = req.body
   let isNew = false
   let json = K.isClientJSON(req)
+  let contentHash
+  let htmlHash
+  let doc
+  let isNewRevision = false
   if(!data.DocProjectVersionId){
     let errParams = {error: 'Missing DocProjectVersionId'}
     if(json) return res.json(errParams)
@@ -107,24 +115,59 @@ exports.save = (req,res) => {
   }
   Doc.findOne({where: {id: data.id}})
     .then((result) => {
-      if(!result){
+      doc = result
+      if(!doc){
         isNew = true
-        result = Doc.build()
+        doc = Doc.build()
       }
-      if(data.title) result.title = data.title
-      if(data.uri) result.uri = data.uri
+      if(data.title) doc.title = data.title
+      if(data.uri) doc.uri = data.uri
+      doc.DocProjectVersionId = data.DocProjectVersionId
       //TODO: Deal with the doc revision to save the content
-      result.DocProjectVersionId = data.DocProjectVersionId
-      return result.save()
+      //here is how this is going to go, first we hash the content and the html
+      //if both match then we do nothing, if they don't match then we make a new
+      //revision record and then finally store the current content and html into
+      //the main doc record as the revisions only support the doc not depend on
+      //it
+      if(data.content && data.html){
+        //first hash them
+        let contentCipher = crypto.createHash('sha256')
+        let htmlCipher = crypto.createHash('sha256')
+        contentHash = contentCipher.update(data.content).digest('hex')
+        htmlHash = htmlCipher.update(data.html).digest('hex')
+      }
+      return DocRevision.findOne({where: {
+        contentHash: contentHash, htmlHash: htmlHash, DocId: doc.id}})
     })
     .then((result) => {
+      if(!result){
+        isNewRevision = true
+        return DocRevision.create({
+          content: data.content,
+          contentHash: contentHash,
+          html: data.html,
+          htmlHash: htmlHash,
+          DocId: doc.id
+        })
+      } else {
+        return result
+      }
+    })
+    .then(() => {
+      if(isNewRevision){
+        doc.content = data.content
+        doc.html = data.html
+      }
+      return doc.save()
+    })
+    .then(() => {
       if(json){
-        res.json({item: result.dataValues})
+        res.json({item: doc.dataValues})
       } else {
         req.flash('success',{
           message: K._l.doc.entry + ' ' + (isNew ? K._l.created : K._l.saved),
-          href: '/doc/edit?id=' + result.id,
-          name: result.id
+          href: res.locals._u._doc_edit + '?id=' + doc.id,
+          name: doc.id
         })
         res.redirect('/doc/list')
       }

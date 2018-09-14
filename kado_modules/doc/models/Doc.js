@@ -37,5 +37,15 @@ module.exports = (sequelize,DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      defaultValue: null
+    },
+    html: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      defaultValue: null
+    }
   })
 }
