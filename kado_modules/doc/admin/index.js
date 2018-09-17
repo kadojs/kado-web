@@ -19,8 +19,6 @@
  * You should have received a copy of the GNU General Public License
  * along with Kado.  If not, see <https://www.gnu.org/licenses/>.
  */
-const crypto = require('crypto')
-
 const K = require('kado')
 const sequelize = K.db.sequelize
 
@@ -135,8 +133,8 @@ exports.save = (req,res) => {
         throw new Error('Content must be defined')
       }
       //first hash them
-      let contentCipher = crypto.createHash('sha256')
-      let htmlCipher = crypto.createHash('sha256')
+      let contentCipher = K.crypto.createHash('sha256')
+      let htmlCipher = K.crypto.createHash('sha256')
       contentHash = contentCipher.update(data.content).digest('hex')
       htmlHash = htmlCipher.update(data.html).digest('hex')
       return DocRevision.findOne({where: {
