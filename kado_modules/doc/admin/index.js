@@ -125,7 +125,7 @@ exports.save = (req,res) => {
       if(data.title) doc.title = data.title
       if(data.uri) doc.uri = data.uri
       doc.DocProjectVersionId = data.DocProjectVersionId
-      //TODO: Deal with the doc revision to save the content
+      //Deal with the doc revision to save the content
       //here is how this is going to go, first we hash the content and the html
       //if both match then we do nothing, if they don't match then we make a new
       //revision record and then finally store the current content and html into
