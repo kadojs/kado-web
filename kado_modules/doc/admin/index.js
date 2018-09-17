@@ -118,6 +118,8 @@ exports.save = (req,res) => {
       doc = result
       if(!doc){
         isNew = true
+        data.html = ''
+        data.content = ''
         doc = Doc.build()
       }
       if(data.title) doc.title = data.title
@@ -129,26 +131,28 @@ exports.save = (req,res) => {
       //revision record and then finally store the current content and html into
       //the main doc record as the revisions only support the doc not depend on
       //it
-      if(data.content && data.html){
-        //first hash them
-        let contentCipher = crypto.createHash('sha256')
-        let htmlCipher = crypto.createHash('sha256')
-        contentHash = contentCipher.update(data.content).digest('hex')
-        htmlHash = htmlCipher.update(data.html).digest('hex')
+      if(undefined === data.content || undefined === data.html){
+        throw new Error('Content must be defined')
       }
+      //first hash them
+      let contentCipher = crypto.createHash('sha256')
+      let htmlCipher = crypto.createHash('sha256')
+      contentHash = contentCipher.update(data.content).digest('hex')
+      htmlHash = htmlCipher.update(data.html).digest('hex')
       return DocRevision.findOne({where: {
         contentHash: contentHash, htmlHash: htmlHash, DocId: doc.id}})
     })
     .then((result) => {
       if(!result){
         isNewRevision = true
-        return DocRevision.create({
+        let revParams = {
           content: data.content,
           contentHash: contentHash,
           html: data.html,
           htmlHash: htmlHash,
           DocId: doc.id
-        })
+        }
+        return DocRevision.create(revParams)
       } else {
         return result
       }
