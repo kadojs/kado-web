@@ -30,7 +30,7 @@ K.configure({
     }
   },
   module: {
-    blog: { enabled: false },
+    blog: { enabled: true },
     setting: { enabled: true },
     staff: { enabled: true }
   }

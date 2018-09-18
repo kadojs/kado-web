@@ -128,12 +128,13 @@ exports.admin = (K,app) => {
     '/admin/view/version/create.html')
   app.view.add('doc/version/edit',__dirname + '/admin/view/version/edit.html')
   //register navigation
-  app.nav.addGroup(app.uri.add('/doc'),'Doc','')
+  app.nav.addGroup(app.uri.add('/doc'),'Doc','file-alt')
   app.nav.addItem('Doc',app.uri.add('/doc/list'),'List','list')
   app.nav.addItem('Doc',app.uri.add('/doc/create'),'Create','plus')
-  app.nav.addItem('Doc',app.uri.add('/doc/project/list'),'List Projects','list')
+  app.nav.addItem('Doc',app.uri.add('/doc/project/list'),
+    'List Projects','umbrella')
   app.nav.addItem('Doc',app.uri.add('/doc/project/create'),
-    'Create Project','plus')
+    'Create Project','project-diagram')
   //register routes
   app.get(app.uri.get('/doc'),(req,res) => {
     res.redirect(301,app.uri.get('/doc/list'))
@@ -172,12 +173,12 @@ exports.main = (K,app) => {
   app.get(app.uri.add('/doc'),main.index)
   app.get(app.uri.add('/doc/:uri'),main.entry)
   //register navigation
-  app.nav.addGroup(app.uri.get('/doc'),'Doc','')
+  app.nav.addGroup(app.uri.get('/doc'),'Doc','file-alt')
   //register routes
   app.get(app.uri.add('/doc/project'),main.project.index)
   app.get(app.uri.add('/doc/project/:uri'),main.project.entry)
   //register navigation
-  app.nav.addGroup(app.uri.get('/doc/project'),'Doc Project','')
+  app.nav.addGroup(app.uri.get('/doc/project'),'Doc Project','project-diagram')
 }
 
 
