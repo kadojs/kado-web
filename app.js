@@ -33,7 +33,8 @@ K.configure({
       override: {
         view: {
           'footer': __dirname + '/interface/main/view/footer.html',
-          'header': __dirname + '/interface/main/view/header.html'
+          'header': __dirname + '/interface/main/view/header.html',
+          'navbar': __dirname + '/interface/main/view/navbar.html'
         }
       }
     }
