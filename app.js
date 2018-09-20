@@ -26,7 +26,16 @@ K.configure({
       ]
     },
     main: {
-      enabled: true
+      enabled: true,
+      staticRoot: [
+        __dirname + '/interface/main/public'
+      ],
+      override: {
+        view: {
+          'footer': __dirname + '/interface/main/view/footer.html',
+          'header': __dirname + '/interface/main/view/header.html'
+        }
+      }
     }
   },
   module: {
