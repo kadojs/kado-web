@@ -1,6 +1,5 @@
 'use strict';
 const K = require('kado')
-const fs = require('fs')
 //application config
 K.configure({
   root: __dirname,
@@ -13,17 +12,7 @@ K.configure({
   },
   interface: {
     admin: {
-      enabled: true,
-      scriptServer: [
-        'markdown-it',
-        'to-mark',
-        'codemirror',
-        'highlight.js',
-        'squire-rte',
-        'tui-code-snippet',
-        'tui-editor',
-        'to-mark'
-      ]
+      enabled: true
     },
     main: {
       enabled: true,
@@ -32,6 +21,7 @@ K.configure({
       ],
       override: {
         view: {
+          'breadcrumb': __dirname + '/interface/main/view/breadcrumb.html',
           'footer': __dirname + '/interface/main/view/footer.html',
           'header': __dirname + '/interface/main/view/header.html',
           'navbar': __dirname + '/interface/main/view/navbar.html'
@@ -41,12 +31,15 @@ K.configure({
   },
   module: {
     blog: { enabled: true },
+    content: {enabled: true},
+    doc: {enabled: true},
     setting: { enabled: true },
     staff: { enabled: true }
   }
 })
 //load env config
 let localConfig = __dirname + '/config.local.js'
-if(fs.existsSync(localConfig)) K.configure(require(localConfig))
+if(K.fs.existsSync(localConfig)) K.configure(require(localConfig))
 if(process.env.KADOWEB_CONFIG) K.configure(process.env.KADOWEB_CONFIG)
+//start application
 K.go('kado-web')
