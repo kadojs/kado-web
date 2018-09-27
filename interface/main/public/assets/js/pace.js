@@ -943,7 +943,7 @@
     };
 
     if (typeof define === 'function' && define.amd) {
-        define(['interface/main/public/theme/assets/js/pace'], function () {
+        define(['interface/main/public/assets/js/pace'], function () {
             return Pace;
         });
     } else if (typeof exports === 'object') {

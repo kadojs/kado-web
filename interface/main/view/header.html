@@ -1,30 +1,37 @@
-<!DOCTYPE HTML>
-<html lang="en-us">
+<!doctype html>
+<html lang="en">
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- CSS -->
-  <link href="/main.css" rel="stylesheet">
-  <link href="theme/assets/css/pace.min.css" rel="stylesheet">
-  <link href="theme/assets/fontawesome/css/all.css" rel="stylesheet">
-  <link href="theme/assets/themify-icons/themify-icons.min.css" rel="stylesheet">
-  <link href="theme/assets/css/metisMenu.min.css" rel="stylesheet">
-  <link href="theme/assets/css/github.min.css" rel="stylesheet">
-  <link href="theme/assets/css/magnific-popup.min.css" rel="stylesheet">
-  <link href="theme/assets/OwlCarousel2/owl.carousel.min.css" rel="stylesheet">
-  <link href="theme/assets/OwlCarousel2/owl.theme.default.min.css" rel="stylesheet">
-  <link href="theme/assets/css/style.css" rel="stylesheet">
-  <title>{{_appTitle}} - {{_l.kado}} {{_l.version}} {{_version}}</title>
+  {{>css}}
+  <title>Kado - Speed up your development today! Module system for Node.JS</title>
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="theme/assets/img/favicon.png" />
+  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 </head>
 <body>
 <div class="loader">
-  {{>navbar}}
-  <div class="page-content">
-    <div class="content-wrapper">
-      <div class="row">
-        <div class="col-md-9 content">
-          {{>breadcrumb}}
-          <div class="doc-content">
+  <div class="top-search">
+    <div class="input-group">
+      <span class="input-group-addon"><i class="ti-search"></i></span>
+      <input type="text" class="form-control" placeholder="Search for snippets ......">
+      <span class="input-group-addon close-search"><i class="ti-close"></i></span>
+    </div>
+  </div>
+  <!-- /.End of Top Search -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top no-background">
+    <div class="container">
+      <a class="navbar-brand" href="index.html"><span style="color: white;">Kado</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        {{>nav}}
+        <ul class="navbar-nav navbar-right">
+          <li class="nav-item search"><a href="#" class="nav-link"><i class="ti-search"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- /.End of Navbar -->

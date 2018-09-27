@@ -1,5 +1,6 @@
 'use strict';
 const K = require('kado')
+let viewFolder = __dirname + '/interface/main/view'
 //application config
 K.configure({
   root: __dirname,
@@ -21,10 +22,16 @@ K.configure({
       ],
       override: {
         view: {
-          'breadcrumb': __dirname + '/interface/main/view/breadcrumb.html',
-          'footer': __dirname + '/interface/main/view/footer.html',
-          'header': __dirname + '/interface/main/view/header.html',
-          'navbar': __dirname + '/interface/main/view/navbar.html'
+          'doc_breadcrumb': viewFolder + '/doc_breadcrumb.html',
+          'doc_header': viewFolder + '/doc_header.html',
+          'doc_footer': viewFolder + '/doc_footer.html',
+          'doc_navbar': viewFolder + '/doc_navbar.html',
+          'css': viewFolder + '/css.html',
+          'footer': viewFolder + '/footer.html',
+          'header': viewFolder + '/header.html',
+          'home': viewFolder + '/home.html',
+          'js': viewFolder + '/js.html',
+          'nav': viewFolder + '/nav.html'
         }
       }
     }

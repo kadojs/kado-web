@@ -21,9 +21,6 @@
     "start": "nodemon --config nodemon.json app.js"
   },
   "dependencies": {
-    "kado": "github:KadoOrg/kado"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.4"
+    "kado": "^3.4.0"
   }
 }
