@@ -15,7 +15,9 @@
   <div class="top-search">
     <div class="input-group">
       <span class="input-group-addon"><i class="ti-search"></i></span>
-      <input type="text" class="form-control" placeholder="Search for snippets ......">
+      <form action="/search" method="get">
+        <input type="text" class="form-control" name="searchPhrase" value="{{_searchPhrase}}" placeholder="Search for snippets ......">
+      </form>
       <span class="input-group-addon close-search"><i class="ti-close"></i></span>
     </div>
   </div>

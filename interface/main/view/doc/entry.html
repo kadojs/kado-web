@@ -1,0 +1,11 @@
+{{>doc_header}}
+  <main role="main" class="container">
+    <div class="row">
+      <div class="blog-post">
+        <h2 class="blog-post-title">{{doc.title}}</h2>
+        <p class="blog-post-meta">Last Updated {{#_printDate}}{{doc.createdAt}}{{/_printDate}}</p>
+        {{{doc.html}}}
+      </div><!-- /.document -->
+    </div>
+  </main>
+{{>doc_footer}}

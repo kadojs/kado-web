@@ -1,0 +1,27 @@
+{{>header}}
+  <header class="minimal-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div class="minimal-header-text">
+            <h1>{{blog.title}}</h1>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                <li class="breadcrumb-item"><a href="/blog">Blog</a></li>
+                <li class="breadcrumb-item">{{blog.title}}</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main role="main" class="container">
+    <div class="blog-post">
+      <h2 class="blog-post-title">{{blog.title}}</h2>
+      <p class="blog-post-meta">{{#_printDate}}{{blog.datePosted}}{{/_printDate}}</p>
+      {{{blog.html}}}
+    </div><!-- /.blog-post -->
+  </main>
+{{>footer}}

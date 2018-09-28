@@ -33,39 +33,24 @@
     </div>
     <div class="form-group has-search">
       <span class="ti-search form-control-feedback"></span>
-      <input type="text" class="form-control" placeholder="Search docs ...">
+      <form action="/search">
+      <input type="text" class="form-control" name="searchPhrase" placeholder="Search docs ..." value="{{_searchPhrase}}">
+      </form>
     </div>
     <!-- /.Actual search box -->
   </div>
   <ul class="metismenu sidebarMenu list-unstyled">
-    <li><a href="layout-general.html">Overview</a></li>
+    <li><a href="/">Overview</a></li>
     <li class="active">
-      <a class="has-arrow" href="#" aria-expanded="true">Layouts</a>
+      <a class="has-arrow" href="#" aria-expanded="true">Documentation</a>
       <ul aria-expanded="true">
-        <li class="active"><a href="layout-general.html">General Layout</a></li>
-        <li><a href="layout-sidebar.html">Sidebar Layout</a></li>
-        <li><a href="layout-minimal.html">Minimal Layout</a></li>
-        <li><a href="blank.html">Blank Page</a></li>
-      </ul>
-    </li>
-    <li>
-      <a class="has-arrow" href="#" aria-expanded="false">Content</a>
-      <ul aria-expanded="false">
-        <li><a href="typography.html">Typography</a></li>
-        <li><a href="images.html">Images</a></li>
-        <li><a href="video.html">Videos</a></li>
-        <li><a href="tables.html">Tables</a></li>
-        <li><a href="code.html">Code</a></li>
-      </ul>
-    </li>
-    <li>
-      <a class="has-arrow" href="#" aria-expanded="false">Utilities</a>
-      <ul aria-expanded="false">
-        <li><a href="alerts.html">Alerts</a></li>
-        <li><a href="accordion.html">Accordion</a></li>
-        <li><a href="progress.html">Progress</a></li>
-        <li><a href="buttons.html">Buttons</a></li>
-        <li><a href="changelog.html">Changelog</a></li>
+        <li class="active"><a class="dropdown-item" href="{{_u._doc}}/kado/3.x/getting-started">Getting Started</a></li>
+        <li><a class="dropdown-item" href="{{_u._doc}}/kado/3.x/installation">Installation</a></li>
+        <li><a class="dropdown-item" href="{{_u._doc}}/kado/3.x/config">Configuration</a></li>
+        <li><a class="dropdown-item" href="{{_u._doc}}/kado/3.x/database">Database</a></li>
+        <li><a class="dropdown-item" href="{{_u._doc}}/kado/3.x/template-variables">Template Variables</a></li>
+        <li><a class="dropdown-item" href="{{_u._doc}}/kado/3.x/interface-reference">Interface Reference</a></li>
+        <li><a class="dropdown-item" href="{{_u._doc}}/kado/3.x/kado-reference">Kado Reference</a></li>
       </ul>
     </li>
   </ul>
