@@ -6,7 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- CSS -->
   {{>css}}
-  <title>Kado - Speed up your development today! Module system for Node.JS</title>
+  {{#_pageTitle}}
+    <title>{{_pageTitle}}</title>
+  {{/_pageTitle}}
+  {{^_pageTitle}}
+    <title>{{_appTitle}} - {{_l.kado}} {{_l.version}} {{_version}}</title>
+  {{/_pageTitle}}
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/img/favicon.png" />
 </head>
