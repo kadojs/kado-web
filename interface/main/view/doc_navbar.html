@@ -27,14 +27,14 @@
       </a>
       <div class="dropdown-menu" aria-labelledby="versionDropdownMenu">
         <div>Versions</div>
-        <a class="dropdown-item active" href="{{{_baseUrl}}}/doc/kado">latest</a>
-        <a class="dropdown-item" href="{{{_baseUrl}}}/doc/kado/3.x">3.x</a>
+        <a class="dropdown-item active" href="{{{_baseUrl}}}{{{_u._doc}}}/kado">latest</a>
+        <a class="dropdown-item" href="{{{_baseUrl}}}{{{_u._doc}}}/kado/3.x">3.x</a>
       </div>
     </div>
     <div class="form-group has-search">
       <span class="ti-search form-control-feedback"></span>
-      <form action="{{{_baseUrl}}}/search">
-      <input type="text" class="form-control" name="searchPhrase" placeholder="Search docs ..." value="{{_searchPhrase}}">
+      <form action="{{{_baseUrl}}}{{{_u._search}}}">
+      <input type="text" class="form-control" name="searchPhrase" placeholder="Search docs ..." value="{{{_searchPhrase}}}">
       </form>
     </div>
     <!-- /.Actual search box -->

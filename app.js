@@ -17,6 +17,7 @@ K.configure({
     },
     main: {
       enabled: true,
+      pageTitle: 'Module system for Node.js, Better than Wordpress - Kado',
       staticRoot: [
         __dirname + '/interface/main/public'
       ],
