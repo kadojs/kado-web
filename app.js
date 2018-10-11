@@ -36,6 +36,8 @@ K.configure({
           'doc/entry': viewFolder + '/doc/entry.html',
           'doc/list': viewFolder + '/doc/list.html',
           'doc/versionList': viewFolder + '/doc/versionList.html',
+          //override error handler
+          'error': viewFolder + '/error.html',
           //override home page
           'home': viewFolder + '/home.html',
           //add common layout helper

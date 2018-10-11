@@ -7,13 +7,14 @@
   <!-- CSS -->
   {{>css}}
   {{#_pageTitle}}
-    <title>{{_pageTitle}}</title>
+    <title>{{_pageTitle}} - powered by {{_l.kado}} v{{_version}}</title>
   {{/_pageTitle}}
   {{^_pageTitle}}
-    <title>{{_appTitle}} - {{_l.kado}} {{_l.version}} {{_version}}</title>
+    <title>Module system for Node.js, Better than Wordpress - Kado</title>
   {{/_pageTitle}}
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+  <script src="{{{_baseUrl}}}/bundle/bundle.min.js"></script>
 </head>
 <body>
 <div class="loader">

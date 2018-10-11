@@ -13,15 +13,16 @@
     <title>{{_appTitle}} - {{_l.kado}} {{_l.version}} {{_version}}</title>
   {{/_pageTitle}}
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+  <link rel="icon" type="image/png" href="{{{_baseUrl}}}/assets/img/favicon.png" />
+  <script src="{{{_baseUrl}}}/bundle/bundle.min.js"></script>
 </head>
 <body>
 <div class="loader">
   <div class="top-search">
     <div class="input-group">
       <span class="input-group-addon"><i class="ti-search"></i></span>
-      <form action="/search" method="get">
-        <input type="text" class="form-control" name="searchPhrase" value="{{_searchPhrase}}" placeholder="Search for snippets ......">
+      <form action="{{{_baseUrl}}}/search" method="get">
+        <input type="text" class="form-control" name="searchPhrase" value="{{{_searchPhrase}}}" placeholder="Search for snippets ......">
       </form>
       <span class="input-group-addon close-search"><i class="ti-close"></i></span>
     </div>
@@ -29,7 +30,7 @@
   <!-- /.End of Top Search -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top no-background">
     <div class="container">
-      <a class="navbar-brand" href="index.html"><span style="color: white;">Kado</span></a>
+      <a class="navbar-brand" href="{{{_baseUrl}}}/"><span style="color: white;">Kado</span></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

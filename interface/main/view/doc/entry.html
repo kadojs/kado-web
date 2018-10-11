@@ -3,8 +3,17 @@
     <div class="row">
       <div class="blog-post">
         <h2 class="blog-post-title">{{doc.title}}</h2>
-        <p class="blog-post-meta">Last Updated {{#_printDate}}{{doc.createdAt}}{{/_printDate}}</p>
-        {{{doc.html}}}
+        <p class="blog-post-meta">Last Updated {{#_printDate}}{{doc.updatedAt}}{{/_printDate}}</p>
+        <div id="content"></div>
+        <script>
+          $(document).ready(() => {
+            var editor = new TuiViewer({
+              el: document.querySelector('#content'),
+              initialValue: new TextDecoder().decode(base64js.toByteArray('{{{doc.content}}}'))
+            })
+            editor.ok = true
+          })
+        </script>
       </div><!-- /.document -->
     </div>
   </main>
