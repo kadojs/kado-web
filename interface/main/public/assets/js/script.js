@@ -3,10 +3,11 @@
 $(document).ready(function () {
     "use strict";
     //page loader
-    Pace.on("done", function () {
+    $('.loader').show();
+    //Pace.on("done", function () {
         //console.log("finished");
-        $('.loader').fadeIn(1500);
-    });
+    //    $('.loader').fadeIn(1500);
+    //});
 
     //navbar add remove calss
     var header = $(".no-background");
