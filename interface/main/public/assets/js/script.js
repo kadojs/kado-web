@@ -2,8 +2,6 @@
 
 $(document).ready(function () {
     "use strict";
-    //page loader
-    $('.loader').show();
     //Pace.on("done", function () {
         //console.log("finished");
     //    $('.loader').fadeIn(1500);
