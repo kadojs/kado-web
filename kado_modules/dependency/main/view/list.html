@@ -1,0 +1,43 @@
+{{>header}}
+  <header class="minimal-header">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div class="minimal-header-text">
+            <h1>Dependencies</h1>
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{{_baseUrl}}}/">Home</a></li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main role="main" class="container">
+    <p>Kado is built largely upon open source software that has been created as part of the <a href="https://nodejs.org">Node.js</a> revolution.</p>
+    <p>The primary Kado code is built and maintained by the <a href="https://www.nullivex.com">Nullivex Web Consortium</a>. Which follows the <a href="/doc/kado/3.x/release-cycle">Kado Release Schedule</a>.</p>
+    <p>Kado comprises of many open source dependencies that really make Kado great, and for that we say thank you! A non exhaustive list is provided below. If you see something missing <a href="/content/contact">Contact Us</a>!</p>
+    <h2 id="donations">Donations</h2>
+    <p>If you feel Kado has helped better your life in some way and you would like to help contribute to the group that helps maintain this code there are a couple ways to do it:</p>
+    <ul>
+      <li>Create a Module</li>
+      <li>Create a Theme</li>
+      <li>Contribute a Feature or Fix</li>
+      <li>Donate</li>
+    </ul>
+    <p>If you would simply like to donate please use the button at the bottom of the page.</p>
+    <h2 id="dependencies">Dependencies</h2>
+    <ul>
+      {{#list}}
+        <li>
+          <form class="form form-horizontal" action="/dependency/entry" method="post" role="form">
+            <input type="hidden" name="id" value="{{id}}" />
+            <button class="btn btn-link btn-sm pull-right">{{name}}</button>
+          </form>
+        </li>
+      {{/list}}
+    </ul>
+  </main>
+{{>footer}}
