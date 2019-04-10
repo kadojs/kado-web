@@ -21,6 +21,14 @@ K.configure({
       staticRoot: [
         __dirname + '/interface/main/public'
       ],
+      addCss: [
+        {uri: '/assets/css/fonts.css'},
+        {uri: '/assets/themify-icons/themify-icons.min.css'},
+        {uri: '/assets/css/metisMenu.min.css'},
+        {uri: '/assets/css/magnific-popup.min.css'},
+        {uri: '/assets/OwlCarousel2/owl.carousel.min.css'},
+        {uri: '/assets/OwlCarousel2/owl.theme.default.min.css'},
+      ],
       override: {
         view: {
           //blog views
