@@ -5,12 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- CSS -->
+  {{#_css}}
+    <link rel="stylesheet" type="text/css" href="{{{uri}}}">
+  {{/_css}}
   {{>css}}
   {{#_pageTitle}}
-    <title>{{_pageTitle}} - powered by {{_l.kado}} v{{_version}}</title>
+  <title>{{_pageTitle}} - powered by {{_l.kado}} v{{_version}}</title>
   {{/_pageTitle}}
   {{^_pageTitle}}
-    <title>Module system for Node.js, Better than Wordpress - Kado</title>
+  <title>Module system for Node.js, Better than Wordpress - Kado</title>
   {{/_pageTitle}}
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
