@@ -44,6 +44,16 @@ exports.index = (req,res) => {
 
 
 /**
+ * Docs (iFrame)
+ * @param {object} req
+ * @param {object} res
+ */
+exports.docs = (req,res) => {
+  res.render(res.locals._view.get('document'))
+}
+
+
+/**
  * Entry
  * @param {object} req
  * @param {object} res

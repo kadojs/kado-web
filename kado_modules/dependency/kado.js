@@ -121,10 +121,12 @@ exports.admin = (K,app) => {
 exports.main = (K,app) => {
   let main = require('./main/index')
   //register views
-  //app.view.add('dependency/entry',__dirname + '/main/view/entry.html')
-  //app.view.add('dependency/list',__dirname + '/main/view/list.html')
+  app.view.add('dependency/entry',__dirname + '/main/view/entry.html')
+  app.view.add('dependency/list',__dirname + '/main/view/list.html')
+  app.view.add('document',__dirname + '/main/view/docs.html')
   //register routes
   app.get(app.uri.p('/dependency'),main.index)
+  app.get(app.uri.p('/document'),main.docs)
   app.post(app.uri.p('/dependency/:uri'),main.entry)
   //register navigation
   app.nav.addGroup(app.uri.p('/dependency'),'Dependency','')
