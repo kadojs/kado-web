@@ -29,6 +29,10 @@ K.configure({
         {uri: '/assets/OwlCarousel2/owl.carousel.min.css'},
         {uri: '/assets/OwlCarousel2/owl.theme.default.min.css'},
       ],
+      addScript: [
+        {uri: '/dist/tuiViewer.js'},
+        {uri: '/js/loadTuiViewer.js'}
+      ],
       override: {
         view: {
           //blog views

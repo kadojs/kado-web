@@ -96,6 +96,80 @@ program
         log.error('Error: Could not remove dependency entry: ' + err)
       })
   })
+program
+  .command('populate')
+  .option('-p --package <file>','Path to package.json file to read dependencies from')
+  .description('Populate dependency list from package.json')
+  .action((cmd)=>{
+    const cp = require('child_process')
+    const updateDependency = (dep) => {
+      //steps needed here
+      //1) get repository url from package.json
+      //2) get the version
+      //3) get the readme
+      let readme = cp.execSync('npm view ' + dep.name + ' readme')
+      let url = cp.execSync('npm view ' + dep.name + ' repository.url')
+      let version = cp.execSync('npm view ' + dep.name + ' version')
+      dep.readme = readme.toString('utf-8').trim()
+      dep.repositoryUrl = url.toString('utf-8').trim()
+      dep.version = version.toString('utf-8').trim()
+      return dep.save()
+        .catch((e) => {
+          K.log.warn('Failed to update ' + dep.name + ': ' + e.message)
+        })
+    }
+    const createDependency = (name) => {
+      let doc = {
+        name: name,
+        url: 'https://npmjs.com/package/' + name
+      }
+      return Dependency.create(doc)
+        .then((result) => {
+          if(!result) throw new Error('Failed to create dependency')
+          doc = result
+          return updateDependency(doc)
+        })
+    }
+    K.bluebird.try(()=> {
+      if(cmd.package) cmd.package = K.path.resolve(cmd.package)
+      if(!cmd.package || !K.fs.existsSync(cmd.package)){
+        throw new Error('Package.json not provided')
+      }
+      let pkg = require(cmd.package)
+      if(!pkg || !pkg.dependencies){
+        throw new Error('Invalid package.json no dependencies found')
+      }
+      return Object.keys(pkg.dependencies)
+    })
+      .map((dep) => {
+        K.log.info('Searching for ' + dep)
+        return Dependency.findOne({where: {name: dep}})
+          .then((result) => {
+            if(result){
+              K.log.warn(result.name + ' already exists, updating')
+              return updateDependency(result)
+                .then(() => {
+                  K.log.info(dep + ' update complete')
+                })
+            } else {
+              return createDependency(dep)
+                .then(() => {
+                  K.log.info(dep + ' created successfully')
+                })
+            }
+          })
+      },{concurrency: 8})
+      .then((result)=>{
+        K.log.info('Added ' + result.length + ' dependencies!')
+        K.log.info('Dependency population complete')
+        process.exit(1)
+      })
+      .catch((e)=>{
+        K.log.error('Failed to populate dependencies: ' + e.message)
+        process.exit(1)
+      })
+
+  })
 //list
 program
   .command('list')

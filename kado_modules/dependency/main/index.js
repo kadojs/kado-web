@@ -31,7 +31,7 @@ const Dependency = sequelize.models.Dependency
  * @param {object} res
  */
 exports.index = (req,res) => {
-  Dependency.findAll()
+  Dependency.findAll({order: [['name','ASC']]})
     .then((results) => {
       res.render('dependency/list',{
         list: results
@@ -59,8 +59,14 @@ exports.docs = (req,res) => {
  * @param {object} res
  */
 exports.entry = (req,res) => {
-  Dependency.findByPk(req.body.id,res.Q)
+  let q = res.Q
+  q.where = {name: req.params.name,}
+  Dependency.findOne(q)
     .then((result) => {
+      if(!result) throw new Error('Dependency not found')
+      result.readmeRaw = result.readme
+      result.readme = K.base64js.fromByteArray(
+        Buffer.from(result.readme,'utf-8'))
       res.render('dependency/entry',{
         item: result
       })

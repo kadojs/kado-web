@@ -127,7 +127,7 @@ exports.main = (K,app) => {
   //register routes
   app.get(app.uri.p('/dependency'),main.index)
   app.get(app.uri.p('/document'),main.docs)
-  app.post(app.uri.p('/dependency/:uri'),main.entry)
+  app.get(app.uri.p('/dependency/:name'),main.entry)
   //register navigation
   app.nav.addGroup(app.uri.p('/dependency'),'Dependency','')
 }

@@ -1,6 +1,13 @@
-{{>header}}
-  <div class="conatiner" style="padding-top: 40px;">
-    <h1>{{item.name}}</h1>
-    <iframe src="{{item.url}}" style="width: 100%; height: 100%"></iframe>
+{{>doc_header}}
+<main role="main" class="container">
+  <div class="row">
+    <div class="blog-post">
+      <h2 class="blog-post-title">{{item.name}}</h2>
+      <p class="blog-post-meta">Last Updated {{#_printDate}}{{doc.updatedAt}}{{/_printDate}}</p>
+      <p class="blog-post-meta"><b>Version:</b> {{item.version}}</p>
+      <p class="blog-post-meta"><b>Repository:</b> <a href="{{{item.repositoryUrl}}}">{{item.repositoryUrl}}</a></p>
+      <div class="tui-content" id="content" data-src="{{{item.readme}}}"></div>
+    </div><!-- /.document -->
   </div>
-{{>footer}}
+</main>
+{{>doc_footer}}

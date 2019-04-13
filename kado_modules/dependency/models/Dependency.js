@@ -29,15 +29,17 @@
  */
 module.exports = (sequelize,DataTypes) => {
   return sequelize.define('Dependency',{
-    name: {
-      type: DataTypes.STRING,
-      allowNull: true,
-        defaultValue: null
-    },
-    url: {
-      type: DataTypes.STRING,
-      allowNull: true,
-        defaultValue: null
-    },
+    name: DataTypes.STRING,
+    url: DataTypes.STRING,
+    repositoryUrl: DataTypes.STRING,
+    version: DataTypes.STRING,
+    readme: DataTypes.BLOB('long')
+  },{
+    indexes: [
+      {name: 'name_idx', fields: ['name'], unique: true},
+      {name: 'url_idx', fields: ['url'], unique: true},
+      {name: 'version_idx', fields: ['version']},
+      {name: 'repositoryUrl_idx', fields: ['repositoryUrl']}
+    ]
   })
 }
