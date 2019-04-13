@@ -59,6 +59,8 @@ exports.docs = (req,res) => {
  * @param {object} res
  */
 exports.entry = (req,res) => {
+  res.locals._asset.addScriptOnce('/dist/tuiViewer.js')
+  res.locals._asset.addScriptOnce('/js/loadTuiViewer.js')
   let q = res.Q
   q.where = {name: req.params.name,}
   Dependency.findOne(q)

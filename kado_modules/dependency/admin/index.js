@@ -32,6 +32,8 @@ const Dependency = sequelize.models.Dependency
  */
 exports.list = (req,res) => {
   if(!req.query.length){
+    res.locals._asset.addScriptOnce('/dist/dataTables.js')
+    res.locals._asset.addScriptOnce('/js/dataTableList.js')
     res.render(res.locals._view.get('dependency/list'))
   } else {
     K.datatable(Dependency,req.query)
