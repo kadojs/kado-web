@@ -21,6 +21,6 @@
     "start": "nodemon --config nodemon.json app.js"
   },
   "dependencies": {
-    "kado": "^3.7.10"
+    "kado": "^3.8.2"
   }
 }
