@@ -145,5 +145,5 @@ exports.cli = () => {
  * Test Access
  */
 exports.test = () => {
-  return require('./test/' + exports._kado.name + '.test.js')
+  //return require('./test/' + exports._kado.name + '.test.js')
 }

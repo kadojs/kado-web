@@ -18,9 +18,10 @@
   },
   "main": "./app.js",
   "scripts": {
-    "start": "nodemon --config nodemon.json app.js"
+    "start": "nodemon --config nodemon.json app.js",
+    "test": "node app test"
   },
   "dependencies": {
-    "kado": "^3.8.2"
+    "kado": "^3.10.0"
   }
 }
