@@ -22,6 +22,7 @@
     "test": "node app test"
   },
   "dependencies": {
-    "kado": "^3.10.0"
+    "kado": "KadoOrg/kado#4.x",
+    "kado-ui": "github:KadoOrg/kado-ui#master"
   }
 }
