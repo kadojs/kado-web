@@ -3,7 +3,7 @@
   <main role="main" class="container">
     <div id="search-header" class="mb20">
       <h1>{{_l.search_results}}</h1>
-      <form class="form-inline mr-auto" role="search" method="get" action="{{{_baseUrl}}}{{{_u._search}}}">
+      <form class="form-inline mr-auto" role="search" method="get" action="{{{_baseUrl}}}{{{_uri._search}}}">
         <input class="form-control mr-sm-2" type="search" name="searchPhrase" placeholder="Search" value="{{{_searchPhrase}}}" />
         <button class="btn btn-default my-2 my-sm-0" type="submit">
           <span class="fa fa-search">&nbsp;</span>
@@ -32,7 +32,7 @@
 {{/results.length}}
 {{^results.length}}
   <link rel="stylesheet" type="text/css" href="{{{_baseUrl}}}/css/search.css" />
-  <form class="form-search" method="get" action="{{{_baseUrl}}}{{{_u._search}}}">
+  <form class="form-search" method="get" action="{{{_baseUrl}}}{{{_uri._search}}}">
     <h1 class="h3 mb-3 font-weight-normal">Search</h1>
     {{#_searchPhrase}}
       <label class="text-danger" for="search">No results found, please try again!</label>
