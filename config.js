@@ -17,6 +17,8 @@ config.$load({
       __dirname + '/main/public'
     ],
     addCss: [
+      {uri: 'https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css'},
+      {uri: 'https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/css/flag-icon.min.css'},
       {uri: '/assets/css/fonts.css'},
       {uri: '/assets/themify-icons/themify-icons.min.css'},
       {uri: '/assets/css/metisMenu.min.css'},
