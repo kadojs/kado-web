@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "kado": "KadoOrg/kado#4.x",
-    "kado-ui": "github:KadoOrg/kado-ui#master"
+    "kado-ui": "github:KadoOrg/kado-ui#master",
+    "mysql2": "^2.0.2"
   }
 }
