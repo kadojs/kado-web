@@ -25,5 +25,9 @@
     "kado": "KadoOrg/kado#4.x",
     "kado-ui": "github:KadoOrg/kado-ui#master",
     "mysql2": "^2.0.2"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
   }
 }
